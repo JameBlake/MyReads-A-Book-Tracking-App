@@ -57,22 +57,3 @@ return (
 
 export default BookSearch
 
-
-
-
-///// updateQuery = (query) => {
-///  this.setState({query:query.trim()})
-
-////  if (this.state.query){
-
- ///   BooksAPI.search(query).then((books)=>{
-///if (books.length>0){
- ///     this.setState({booksFound: books})}
-
- ///     else {
-
-  ///      this.setState({booksFound: []})
- //     }
- /// } )
- /// }
-//}
