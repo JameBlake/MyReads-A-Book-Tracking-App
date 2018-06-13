@@ -11,15 +11,20 @@ class BookSearch extends Component {
           booksFound:[]
 }
 
+
 updateQuery = (event) => {
     const query = event;
     if (query) {
       this.setState({query})
       BooksAPI.search(query).then( enquire => {
           if (enquire instanceof Array) {
+
             const found = enquire.filter(found => found.authors && found.imageLinks);
+            this.addShelf(found)
             this.setState({ booksFound: found });
             console.log(this.state.booksFound);
+            
+
         } else {
           this.setState({ booksFound: [] })
         }
@@ -29,6 +34,22 @@ updateQuery = (event) => {
       this.setState({ booksFound: [], query:'' })
     }
   }
+
+
+addShelf(found) {
+	if(found){
+		found.map(find => {
+			find.shelf=this.shelving(find);
+			return find;
+		})
+	} else return
+ }
+
+shelving(find){
+
+let hasShelf = this.props.books.filter(book => book.id === find.id);
+    return hasShelf.length ? hasShelf[0].shelf : "none";
+}
 
 render(){
 
@@ -57,7 +78,9 @@ render(){
                           img={book.imageLinks.thumbnail}
                           key = {book.id}
                           books={this.props.books}
-                          shelfChange={this.props.shelfChange}/>))}
+                          shelf={book.shelf}
+                          shelfChange={this.props.shelfChange}
+                          />))}
 
                         </ol>
 

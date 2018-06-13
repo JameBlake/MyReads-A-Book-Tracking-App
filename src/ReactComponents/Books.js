@@ -16,7 +16,8 @@ class Book extends Component {
 
 				<ShelfSelector shelf = {this.props.shelf}
 				book ={this.props.book}
-				shelfChange={this.props.shelfChange}/>
+				shelfChange={this.props.shelfChange}
+        select value = {this.props.shelf}/>
 
           	</div>
 
